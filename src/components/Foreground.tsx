@@ -1,17 +1,37 @@
-import { useState, useRef } from "react";
-import Cards from "./Cards.tsx";
-import { Popup } from "./Popup.tsx";
+import { useState, useRef, useEffect } from "react";
+import Cards from "./Cards";
+import { Popup } from "./Popup";
 
 function Foreground() {
   const ref = useRef(null);
   const [notes, setNotes] = useState([]);
+
+  // Retrieve notes from local storage on initial load
+  useEffect(() => {
+      // @ts-ignore
+
+    const storedNotes = JSON.parse(localStorage.getItem("notes")) || [];
+    setNotes(storedNotes);
+  }, []); // This only runs once when the component mounts
+
+  // Save notes to local storage whenever the notes state changes
+  useEffect(() => {
+    if (notes.length > 0) {
+      localStorage.setItem("notes", JSON.stringify(notes));
+    }
+  }, [notes]);
   // @ts-ignore
 
-
   const handleAddNote = (newNote) => {
-    // @ts-ignore
+      // @ts-ignore
 
     setNotes((prevNotes) => [...prevNotes, newNote]);
+  };
+  // @ts-ignore
+
+  const handleDeleteNote = (index) => {
+    const updatedNotes = notes.filter((_, noteIndex) => noteIndex !== index);
+    setNotes(updatedNotes);
   };
 
   return (
@@ -21,7 +41,12 @@ function Foreground() {
     >
       <Popup onAddNote={handleAddNote} />
       {notes.map((item, index) => (
-        <Cards key={index} data={item} reference={ref} />
+        <Cards
+          key={index}
+          data={item}
+          reference={ref}
+          onDelete={() => handleDeleteNote(index)} // Pass delete handler
+        />
       ))}
     </div>
   );

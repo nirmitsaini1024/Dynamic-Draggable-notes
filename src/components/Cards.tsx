@@ -1,8 +1,9 @@
 import { FaRegFileLines } from "react-icons/fa6";
+import { RxCross2 } from "react-icons/rx";
 import { motion } from "framer-motion";
 
 // @ts-ignore
-function Cards({ data, reference }) {
+function Cards({ data, reference, onDelete }) {
   return (
     <motion.div
       drag
@@ -12,6 +13,15 @@ function Cards({ data, reference }) {
       dragTransition={{ bounceStiffness: 100, bounceDamping: 30 }}
       className="relative flex-shrink-0 w-60 h-72 rounded-[40px] bg-zinc-900/90 text-white px-8 py-10 overflow-hidden"
     >
+
+      <button
+        onClick={onDelete}
+        className="absolute top-4 right-4 text-white hover:text-gray-300" 
+        style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}
+      >
+        <RxCross2 size={20} /> 
+      </button>
+
       <div className="flex items-center">
         <FaRegFileLines />
         <h3 className="text-lg ml-2 font-bold text-gray-300">{data.name}</h3>
