@@ -11,8 +11,8 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-  // @ts-ignore
-  export function Popup({ onAddNote }) {
+
+export function Popup({ onAddNote }) {
   const [name, setName] = useState("");
   const [text, setText] = useState("");
   const [open, setOpen] = useState(false);
@@ -40,7 +40,7 @@ import { Label } from "@/components/ui/label";
       >
         <FaPlus />
       </Button>
-      <DialogContent className="sm:max-w-[425px] w-full max-w-[90%] md:max-w-[80%] bg-gray-900 text-white rounded-lg shadow-lg p-6">
+      <DialogContent className="sm:max-w-[425px] w-full max-w-[90%] bg-gray-900 text-white rounded-lg shadow-lg p-6">
         <DialogHeader>
           <DialogTitle className="text-lg font-semibold">Add Notes</DialogTitle>
           <DialogDescription className="text-sm">
