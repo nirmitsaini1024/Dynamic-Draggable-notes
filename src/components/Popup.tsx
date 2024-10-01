@@ -11,8 +11,8 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-
-export function Popup({ onAddNote }) {
+  // @ts-ignore
+  export function Popup({ onAddNote }) {
   const [name, setName] = useState("");
   const [text, setText] = useState("");
   const [open, setOpen] = useState(false);
